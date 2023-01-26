@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, url_for, redirect, session, jsonify
-# from flask_pymongo import PyMongo
 from werkzeug.utils import secure_filename
 import os
 from bson.objectid import ObjectId
@@ -104,7 +103,10 @@ def APPLY_JOB():
     job_id = request.form['job_id']
     jd_data = JOBS.find_one({"_id":ObjectId(job_id)},{"Job_Description":1})
     emp_data = resumeFetchedData.find_one({"UserId":ObjectId(session['user_id'])},{"ResumeData":1})
+    # emp_data = resumeFetchedData.find_one({"UserId":ObjectId(session['user_id'])},{"ResumeAnnotatedData":1})
     match_percentage = job_compare_obj.match(str(jd_data['Job_Description']),str(emp_data['ResumeData']))
+    # match_percentage = job_compare_obj.match(str(jd_data['Job_Description']),str(emp_data['ResumeAnnotatedData']))
+
     result = None
     result = Applied_EMP.insert_one({"job_id":ObjectId(job_id),"user_id":ObjectId(session['user_id']),"User_name":session['user_name'],"Matching_percentage":match_percentage})
     if result == None:

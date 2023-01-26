@@ -1,0 +1,49 @@
+Position Description
+
+Position Title: Python Developer
+
+Tasks and responsibilities
+
+The candidate will participate in the various stages of software development for complex web applications
+The candidate will participate in the development of the solution (design, ideation, technological choices ...)
+The candidate will work in an Agile environment.
+The candidate will be responsible for the stability and performance of the application
+
+Qualifications/Skills Required:
+
+Practical experience in web backend development for at least 5 years
+Expertise in several of the technologies listed below:
+Python (required)
+Java
+Spring / Spring Boot
+REST
+SQL
+Object-oriented design
+Good verbal and written communication
+Strong tolerance to ambiguity
+Problem solving technique
+Familiarity with Unix-based systems
+Functional knowledge of French and English
+
+Preferred Competencies:
+
+Diploma in Computer Science (College or University)
+Asset:
+Docker
+Kubernetes / OpenShift
+Vue.js, Angular or React
+HTML5, CSS3, GIT, Webpack, NPM
+
+Your future duties and responsibilities
+
+Required Qualifications To Be Successful In This Role
+
+Insights you can act on
+
+While technology is at the heart of our clients’ digital transformation, we understand that people are at the heart of business success.
+
+When you join CGI, you become a trusted advisor, collaborating with colleagues and clients to bring forward actionable insights that deliver meaningful and sustainable outcomes. We call our employees "members" because they are CGI shareholders and owners and owners who enjoy working and growing together to build a company we are proud of. This has been our Dream since 1976, and it has brought us to where we are today — one of the world’s largest independent providers of IT and business consulting services.
+
+At CGI, we recognize the richness that diversity brings. We strive to create a work culture where all belong and collaborate with clients in building more inclusive communities. As an equal-opportunity employer, we want to empower all our members to succeed and grow. If you require an accommodation at any point during the recruitment process, please let us know. We will be happy to assist.
+
+Ready to become part of our success story? Join CGI — where your ideas and actions make a difference.

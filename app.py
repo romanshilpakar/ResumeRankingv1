@@ -41,6 +41,7 @@ app.config['MONGO_URI']= 'mongodb+srv://majorproject:majorproject@cluster0.mfxpq
 mongo.init_app(app)
 resumeFetchedData = mongo.db.resumeFetchedData
 Ranked_resume = mongo.db.Ranked_resume
+Applied_EMP=mongo.db.Applied_EMP
 IRS_USERS = mongo.db.IRS_USERS
 JOBS = mongo.db.JOBS
 from Job_post import job_post
@@ -198,6 +199,10 @@ def uploadResume():
                         dic[label_list[i]] = [text_list[i]]
                 
                 print(dic)
+                resume_data_annotated = ''
+                for key, value in dic.items():
+                    for val in value:
+                        resume_data_annotated += val + " "
                
                 value_name = dic.get('NAME')
                 # print(value)
@@ -215,7 +220,7 @@ def uploadResume():
                 print("CERTIFICATION:", value_certificate)
                 
                 result = None               
-                result = resumeFetchedData.insert_one({"UserId":ObjectId(session['user_id']),"Name":value_name[0],"LINKEDIN LINK": value_linkedin[0],"SKILLS": list(value_skills),"CERTIFICATION": value_certificate,"Appear":0,"ResumeTitle":filename,"ResumeData":text_of_resume})                
+                result = resumeFetchedData.insert_one({"UserId":ObjectId(session['user_id']),"Name":value_name[0],"LINKEDIN LINK": value_linkedin[0],"SKILLS": list(value_skills),"CERTIFICATION": value_certificate,"Appear":0,"ResumeTitle":filename,"ResumeAnnotatedData":resume_data_annotated,"ResumeData":text_of_resume})                
                 
                 if result == None:
                     return render_template("EmployeeDashboard.html",errorMsg="Problem in Resume Data Storage")  
@@ -245,8 +250,14 @@ def empSearch():
     if request.method == 'POST':
         category = str(request.form.get('category'))
         print(category)
-        TopEmployeers=None
-        TopEmployeers=Ranked_resume.find({"Top_skills."+category:{"$ne":None}},{"Top_skills."+category:1,"UserId":1}).sort([("Top_skills."+category,-1)])
+        
+        TopEmployeers = None
+        job_ids = []
+        job_cursor = JOBS.find({"Job_Profile": category},{"_id": 1})
+        for job in job_cursor:
+            job_ids.append(job['_id'])
+
+        TopEmployeers = Applied_EMP.find({"job_id": {"$in": job_ids}},{"user_id": 1, "Matching_percentage": 1}).sort([("Matching_percentage", -1)])
         # print(TopEmployeers)
         # print(type(TopEmployeers))
         if TopEmployeers == None:
@@ -256,7 +267,7 @@ def empSearch():
             cnt = 0
 
             for i in TopEmployeers:
-                se=IRS_USERS.find_one({"_id":ObjectId(i['UserId'])},{"Name":1,"Email":1,"_id":1})
+                se=IRS_USERS.find_one({"_id":ObjectId(i['user_id'])},{"Name":1,"Email":1,"_id":1})
                 selectedResumes[cnt] = {"Name":se['Name'],"Email":se['Email'],"_id":se['_id']}
                 se = None
                 cnt += 1
